@@ -15,4 +15,12 @@ class Practice extends Model
         'logo',
         'website_url'
     ];
+
+    /**
+     * Get employees with this practice
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
