@@ -20,6 +20,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        if (!config('app.registration_allowed')) {
+            return abort('403');
+        }
+
         return view('auth.register');
     }
 
@@ -33,6 +37,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        if (!config('app.registration_allowed')) {
+            return abort('403');
+        }
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

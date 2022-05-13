@@ -144,6 +144,18 @@ return [
     ],
 
     /*
+    |---------------------------------------------------------------------------
+    | Registration allowed
+    |---------------------------------------------------------------------------
+    |
+    | Setting this value to 'false' in the .env file will disable registration
+    | for new users
+    |
+    */
+
+    'registration_allowed' => env('APP_REGISTRATION_ALLOWED'),
+
+    /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
