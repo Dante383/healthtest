@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Practice;
 
 return new class extends Migration
 {
@@ -13,13 +14,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('practices', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->bigInteger('practice_id')->unsigned()->index();
             $table->string('email')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('website_url')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
+
+            $table->foreign('practice_id')->references('id')->on('practices');
         });
     }
 
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('practices');
+        Schema::dropIfExists('employees');
     }
 };
