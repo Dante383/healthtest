@@ -1,0 +1,46 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Dashboard | Practices') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <a class="float-right text-blue-500" href="{{ route('dashboard_practice.create') }}">Add new practice</a>
+                    <table class="table-auto border-collapse w-full text-sm">
+                      <thead>
+                        <tr>
+                          <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Name</th>
+                          <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Email</th>
+                          <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Logo</th>
+                          <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Website URL</th>
+                          <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white dark:bg-slate-800">
+                        @foreach ($practices as $practice)
+                        <tr>
+                          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-blue-500 dark:text-blue-400"><a href="{{ route('dashboard_practice', $practice->id)}}">{{ $practice->name }}</a></td>
+                          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ $practice->email }}</td>
+                          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><a href="{{ $practice->logo }}"><img class="w-10" src="/{{ $practice->logo }}"/></a></td>
+                          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><a href="{{ $practice->website_url }}">{{ $practice->website_url }}</a></td>
+                          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                            <form method="POST" action="{{ route('dashboard_practice.delete', $practice->id) }}">
+                                @method('DELETE')
+                                @csrf
+                                <x-button type="submit">Delete</x-button>
+                            </form>
+                          </td>
+                        </tr>
+                        @endforeach
+                      </tbody>
+                  </table>
+                  {{ $practices->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

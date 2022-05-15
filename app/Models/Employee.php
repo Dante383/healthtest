@@ -12,7 +12,7 @@ class Employee extends Model
 
     /**
      * Get employee's practice
-     */
+    */
     public function practice()
     {
         return $this->belongsTo(Practice::class);
