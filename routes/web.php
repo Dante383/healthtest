@@ -47,6 +47,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 
     Route::get('/field-of-practice/{id}', [FieldOfPracticeController::class, 'index'])->name('dashboard_field-of-practice');
     Route::patch('/field-of-practice/{id}', [FieldOfPracticeController::class, 'update'])->name('dashboard_field-of-practice.update');
+    Route::delete('/field-of-practice/{id}', [FieldOfPracticeController::class, 'delete'])->name('dashboard_field-of-practice.delete');
+    Route::get('/new-field-of-practice', [FieldOfPracticeController::class, 'create'])->name('dashboard_field-of-practice.create');
+    Route::post('/fields-of-practice', [FieldOfPracticeController::class, 'store'])->name('dashboard_field-of-practice.store');
 });
 
 require __DIR__.'/auth.php';
