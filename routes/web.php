@@ -41,6 +41,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function(){
 
     Route::get('/employee/{id}', [EmployeeController::class, 'index'])->name('dashboard_employee');
     Route::patch('/employee/{id}', [EmployeeController::class, 'update'])->name('dashboard_employee.update');
+    Route::delete('/employee/{id}', [EmployeeController::class, 'delete'])->name('dashboard_employee.delete');
     Route::get('/new-employee', [EmployeeController::class, 'create'])->name('dashboard_employee.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('dashboard_employee.store');
 

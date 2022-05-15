@@ -18,8 +18,10 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('dashboard_employee.update', $employee->id) }}">
-                        @method('patch')
+                    <form method="POST" action="{{ Route::currentRouteName() == 'dashboard_employee' ? route('dashboard_employee.update', $employee->id) : route('dashboard_employee.store') }}">
+                        @if (Route::currentRouteName() == 'dashboard_employee')
+                            @method('patch')
+                        @endif
                         @csrf
 
                         <div>
@@ -35,9 +37,15 @@
                         <div>
                             <x-label for="practice" :value="__('Practice')" />
                             <select id="practice" class="block mt-1 w-full" name="practice_id">
-                                @foreach ($practices as $practice)
-                                    <option value="{{ $practice->id }}" {{ $practice->id == $employee->practice->id ? "selected" : ""}}>{{ $practice->name }}</option>
-                                @endforeach
+                                @if (isset($employee->practice))
+                                    @foreach ($practices as $practice)
+                                        <option value="{{ $practice->id }}" {{ $practice->id == $employee->practice->id ? "selected" : ""}}>{{ $practice->name }}</option>
+                                    @endforeach
+                                @else
+                                    @foreach ($practices as $practice)
+                                        <option value="{{ $practice->id }}">{{ $practice->name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         <div>
                             <x-label for="email" :value="__('Email')" />

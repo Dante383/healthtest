@@ -18,6 +18,7 @@
                           <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Practice</th>
                           <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Email</th>
                           <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Phone</th>
+                          <th class="border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Action</th>
                         </tr>
                       </thead>
                       <tbody class="bg-white dark:bg-slate-800">
@@ -28,6 +29,13 @@
                           <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-blue-500 dark:text-blue-400"><a href="{{ route('dashboard_practice', $employee->practice->id) }}">{{ $employee->practice->name }}</a></td>
                           <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ $employee->email }}</td>
                           <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">{{ $employee->phone }}</td>
+                          <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
+                            <form method="POST" action="{{ route('dashboard_employee.delete', $employee->id) }}">
+                                @method('DELETE')
+                                @csrf
+                                <x-button type="submit">Delete</x-button>
+                            </form>
+                          </td>
                         </tr>
                         @endforeach
                       </tbody>
